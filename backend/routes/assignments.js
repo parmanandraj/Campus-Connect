@@ -34,7 +34,7 @@ router.post(
     }
 
     try {
-      const assignment = new Assignment(req.body);
+      const assignment = new Assignment({ ...req.body, createdBy: req.user.userId });
       await assignment.save();
       res.status(201).json(assignment);
     } catch (error) {

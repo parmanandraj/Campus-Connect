@@ -53,6 +53,10 @@ async function apiRequest(endpoint, method = 'GET', body) {
   const data = await response.json();
 
   if (!response.ok) {
+    if (response.status === 401) {
+      logout();
+      throw new Error('Session expired. Please log in again.');
+    }
     throw new Error(data.message || 'Request failed');
   }
 

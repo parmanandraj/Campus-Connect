@@ -35,7 +35,7 @@ router.post(
     }
 
     try {
-      const job = new Job(req.body);
+      const job = new Job({ ...req.body, createdBy: req.user.userId });
       await job.save();
       res.status(201).json(job);
     } catch (error) {

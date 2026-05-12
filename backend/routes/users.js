@@ -3,6 +3,8 @@ const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 const authMiddleware = require('../middleware/auth');
 const User = require('../models/User');
+const Assignment = require('../models/Assignment');
+const Job = require('../models/Job');
 
 const router = express.Router();
 
@@ -79,6 +81,8 @@ router.delete('/:id', authMiddleware, async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
+    await Assignment.deleteMany({ createdBy: user._id });
+    await Job.deleteMany({ createdBy: user._id });
     await user.deleteOne();
     res.json({ message: 'User deleted successfully' });
   } catch (error) {
