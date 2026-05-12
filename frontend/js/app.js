@@ -29,7 +29,7 @@ function getUser() {
 function logout() {
   localStorage.removeItem('campusconnect_token');
   localStorage.removeItem('campusconnect_user');
-  window.location.href = 'http://localhost:3000/login.html';
+  window.location.href = 'login.html';
 }
 
 async function apiRequest(endpoint, method = 'GET', body) {
@@ -73,7 +73,7 @@ async function handleRegister(event) {
   try {
     const data = await apiRequest('/auth/register', 'POST', { name, email, password, role });
     setUserInStorage(data.token, data.user);
-    window.location.href = data.user.role === 'admin' ? 'http://localhost:3000/admin-dashboard.html' : 'http://localhost:3000/student-dashboard.html';
+    window.location.href = data.user.role === 'admin' ? 'admin-dashboard.html' : 'student-dashboard.html';
   } catch (error) {
     showMessage(error.message);
   }
@@ -87,7 +87,7 @@ async function handleLogin(event) {
   try {
     const data = await apiRequest('/auth/login', 'POST', { email, password });
     setUserInStorage(data.token, data.user);
-    window.location.href = data.user.role === 'admin' ? 'http://localhost:3000/admin-dashboard.html' : 'http://localhost:3000/student-dashboard.html';
+    window.location.href = data.user.role === 'admin' ? 'admin-dashboard.html' : 'student-dashboard.html';
   } catch (error) {
     showMessage(error.message);
   }
@@ -96,11 +96,11 @@ async function handleLogin(event) {
 function requireAuth(allowedRoles = []) {
   const user = getUser();
   if (!user) {
-    window.location.href = 'http://localhost:3000/login.html';
+    window.location.href = 'login.html';
     return null;
   }
   if (allowedRoles.length > 0 && !allowedRoles.includes(user.role)) {
-    window.location.href = user.role === 'admin' ? 'http://localhost:3000/admin-dashboard.html' : 'http://localhost:3000/student-dashboard.html';
+    window.location.href = user.role === 'admin' ? 'admin-dashboard.html' : 'student-dashboard.html';
     return null;
   }
   return user;

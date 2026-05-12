@@ -479,6 +479,7 @@ button {
   color: #fff;
   border: none;
   border-radius: 14px;
+  margin: 1rem 0;
   padding: 0.95rem 1.4rem;
   cursor: pointer;
   transition: transform 0.2s ease, background 0.2s ease;
@@ -516,7 +517,7 @@ button.secondary {
 .dashboard-section,
 .auth-card,
 .profile-card {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.4rem;
 }
 
 .cards-row {
@@ -553,7 +554,7 @@ button.secondary {
   border: 1px solid #e2e8f0;
   border-radius: 14px;
   padding: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 5rem;
 }
 
 .card li:last-child,
