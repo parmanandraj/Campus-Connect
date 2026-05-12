@@ -275,6 +275,17 @@ function renderAssignmentAdminList(assignments) {
               <div class="action-buttons">
                 <button class="button" data-edit-id="${assignment._id}">Edit</button>
                 <button class="button secondary" data-delete-id="${assignment._id}">Delete</button>
+                <button class="button" data-toggle-completed="${assignment._id}">View Completed</button>
+              </div>
+              <div class="item-details hidden" id="completed-${assignment._id}">
+                <h4>Completed By</h4>
+                <ul>
+                  ${assignment.completedBy && assignment.completedBy.length
+                    ? assignment.completedBy
+                        .map(user => `<li>${user.name} (${user.email})</li>`)
+                        .join('')
+                    : '<li>No students have completed this assignment yet.</li>'}
+                </ul>
               </div>
             </li>
           `
@@ -306,6 +317,16 @@ function renderAssignmentAdminList(assignments) {
       }
     });
   });
+
+  assignmentAdminList.querySelectorAll('[data-toggle-completed]').forEach(button => {
+    button.addEventListener('click', event => {
+      const assignmentId = event.target.dataset.toggleCompleted;
+      const detail = document.getElementById(`completed-${assignmentId}`);
+      if (!detail) return;
+      const isHidden = detail.classList.toggle('hidden');
+      event.target.textContent = isHidden ? 'View Completed' : 'Hide Completed';
+    });
+  });
 }
 
 function renderJobAdminList(jobs) {
@@ -323,6 +344,17 @@ function renderJobAdminList(jobs) {
               <div class="action-buttons">
                 <button class="button" data-edit-job="${job._id}">Edit</button>
                 <button class="button secondary" data-delete-job="${job._id}">Delete</button>
+                <button class="button" data-toggle-applicants="${job._id}">View Applicants</button>
+              </div>
+              <div class="item-details hidden" id="applicants-${job._id}">
+                <h4>Applicants</h4>
+                <ul>
+                  ${job.applicants && job.applicants.length
+                    ? job.applicants
+                        .map(user => `<li>${user.name} (${user.email})</li>`)
+                        .join('')
+                    : '<li>No students have applied yet.</li>'}
+                </ul>
               </div>
             </li>
           `
@@ -352,6 +384,16 @@ function renderJobAdminList(jobs) {
       } catch (error) {
         showMessage(error.message);
       }
+    });
+  });
+
+  jobAdminList.querySelectorAll('[data-toggle-applicants]').forEach(button => {
+    button.addEventListener('click', event => {
+      const jobId = event.target.dataset.toggleApplicants;
+      const detail = document.getElementById(`applicants-${jobId}`);
+      if (!detail) return;
+      const isHidden = detail.classList.toggle('hidden');
+      event.target.textContent = isHidden ? 'View Applicants' : 'Hide Applicants';
     });
   });
 }

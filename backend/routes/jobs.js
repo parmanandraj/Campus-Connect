@@ -7,10 +7,19 @@ const router = express.Router();
 
 router.get('/', authMiddleware, async (req, res) => {
   try {
-    const jobs = await Job.find().sort({ postedAt: -1 });
+    let query = Job.find().sort({ postedAt: -1 });
+    if (req.user.role === 'admin') {
+      query = query.populate('applicants', 'name email');
+    }
+    const jobs = await query;
     const jobsWithStatus = jobs.map(job => {
       const jobObj = job.toObject();
       jobObj.applied = (jobObj.applicants || []).some(id => id.toString() === req.user.userId);
+      if (req.user.role === 'admin') {
+        jobObj.applicants = jobObj.applicants || [];
+      } else {
+        delete jobObj.applicants;
+      }
       return jobObj;
     });
     res.json(jobsWithStatus);

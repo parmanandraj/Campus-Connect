@@ -7,10 +7,19 @@ const router = express.Router();
 
 router.get('/', authMiddleware, async (req, res) => {
   try {
-    const assignments = await Assignment.find().sort({ createdAt: -1 });
+    let query = Assignment.find().sort({ createdAt: -1 });
+    if (req.user.role === 'admin') {
+      query = query.populate('completedBy', 'name email');
+    }
+    const assignments = await query;
     const assignmentsWithStatus = assignments.map(assignment => {
       const assignmentObj = assignment.toObject();
       assignmentObj.completed = (assignmentObj.completedBy || []).some(id => id.toString() === req.user.userId);
+      if (req.user.role === 'admin') {
+        assignmentObj.completedBy = assignmentObj.completedBy || [];
+      } else {
+        delete assignmentObj.completedBy;
+      }
       return assignmentObj;
     });
     res.json(assignmentsWithStatus);
