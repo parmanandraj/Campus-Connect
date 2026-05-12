@@ -1,0 +1,272 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #eaf2ff 0%, #f8fafc 100%);
+  color: #0f172a;
+  min-height: 100vh;
+}
+
+.container {
+  width: min(1200px, 96%);
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.page-header,
+.auth-card,
+.hero-card,
+.card,
+.profile-card {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+  padding: 2rem;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-card {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.5fr) minmax(260px, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #475569;
+  margin-bottom: 1.5rem;
+}
+
+.hero-stats {
+  display: grid;
+  gap: 1rem;
+}
+
+.stat-card,
+.feature-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 1.15rem 1.25rem;
+}
+
+.stat-card strong,
+.feature-card h3 {
+  display: block;
+  margin-bottom: 0.85rem;
+  color: #1e293b;
+}
+
+.feature-card p,
+.stat-card p {
+  color: #475569;
+  line-height: 1.75;
+}
+
+.auth-page {
+  display: grid;
+  place-items: center;
+  min-height: 90vh;
+}
+
+.auth-card {
+  width: min(500px, 100%);
+}
+
+.auth-card h1,
+.auth-card h3,
+.page-header h1,
+.card h3,
+.profile-card h2 {
+  color: #0f172a;
+}
+
+.auth-card p,
+.card p,
+.profile-card p,
+.subtitle {
+  color: #475569;
+  line-height: 1.8;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  color: #475569;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border-radius: 14px;
+  border: 1px solid #cbd5e1;
+  margin-top: 0.45rem;
+  font-size: 1rem;
+  color: #0f172a;
+  background: #f8fafc;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.button,
+button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 0.95rem 1.4rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+  font-size: 1rem;
+}
+
+.button:hover,
+button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.button.secondary,
+button.secondary {
+  background: #475569;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.small-text {
+  color: #64748b;
+  margin-top: 1rem;
+}
+
+.message {
+  margin-top: 1rem;
+  color: #dc2626;
+}
+
+.dashboard-section,
+.auth-card,
+.profile-card {
+  margin-bottom: 1.5rem;
+}
+
+.cards-row {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.stats-row {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-bottom: 1.5rem;
+}
+
+.card ul,
+#userList,
+#assignmentAdminList,
+#jobAdminList,
+#assignmentList,
+#jobList {
+  list-style: none;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.card li,
+#userList li,
+#assignmentAdminList li,
+#jobAdminList li,
+#assignmentList li,
+#jobList li {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card li:last-child,
+#userList li:last-child,
+#assignmentAdminList li:last-child,
+#jobAdminList li:last-child,
+#assignmentList li:last-child,
+#jobList li:last-child {
+  margin-bottom: 0;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.profile-card p {
+  margin-top: 1rem;
+  line-height: 1.8;
+}
+
+.hidden {
+  display: none;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.15rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.subtitle {
+  margin-top: 0.35rem;
+  font-size: 0.98rem;
+}
+
+@media (max-width: 860px) {
+  .hero-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+}
