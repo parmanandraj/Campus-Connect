@@ -655,7 +655,21 @@ function loadProfilePage() {
   loadJobs();
 }
 
+function highlightActiveNav() {
+  const links = document.querySelectorAll('.nav-links a');
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  links.forEach(link => {
+    const linkPage = link.getAttribute('href').split('/').pop();
+    if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+}
+
 function initPage() {
+  highlightActiveNav();
   const path = window.location.pathname.split('/').pop();
   if (path === 'register.html') {
     document.getElementById('registerForm').addEventListener('submit', handleRegister);

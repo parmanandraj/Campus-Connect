@@ -8,49 +8,112 @@
 </head>
 <body>
   <div class="container">
-    <section class="hero-card">
-      <div class="hero-content">
-        <h1>CampusConnect</h1>
-        <p>A simple student and admin portal for assignments, job opportunities, and campus coordination.</p>
-        <div class="button-group">
-          <a class="button" href="http://localhost:3000/register.html">Register</a>
-          <a class="button secondary" href="http://localhost:3000/login.html">Login</a>
+    <header class="site-header">
+      <div class="logo-block">
+        <img src="./images/logo.webp" alt="CampusConnect Logo">
+        <div>
+          <h1 class="site-title">CampusConnect</h1>
+          <p class="site-tagline">Campus tasks, jobs, and coordination all in one place.</p>
         </div>
       </div>
-      <div class="hero-stats">
-        <div class="stat-card">
-          <strong>2 Roles</strong>
-          <p>Student & Admin</p>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="register.html">Register</a>
+        <a href="login.html">Login</a>
+        <a href="profile.html">Profile</a>
+      </nav>
+    </header>
+
+    <section class="hero-card hero-section">
+      <div class="hero-content">
+        <div class="eyebrow">Campus campus portal</div>
+        <h1>Build stronger college connections with students and admins.</h1>
+        <p>CampusConnect helps your campus stay organized with assignments, job boards, role-based access, and an easy admin workflow.</p>
+        <div class="hero-badges">
+          <span>Role-based access</span>
+          <span>Fast onboarding</span>
+          <span>Secure data</span>
         </div>
-        <div class="stat-card">
-          <strong>CRUD System</strong>
-          <p>Manage assignments, jobs, and users.</p>
+        <div class="button-group">
+          <a class="button" href="register.html">Get Started</a>
+          <a class="button secondary" href="login.html">Login</a>
         </div>
-        <div class="stat-card">
-          <strong>Responsive</strong>
-          <p>Work on desktop and mobile browsers.</p>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card feature-tower">
+          <div class="summary-pill">Admin + Student</div>
+          <h3>Manage assignments, jobs, and users.</h3>
+          <p>Admins can create content while students can discover opportunities and complete tasks.</p>
+        </div>
+        <div class="hero-stats-grid">
+          <div class="stat-card">
+            <strong>Fast setup</strong>
+            <p>Login quickly and start using the portal immediately.</p>
+          </div>
+          <div class="stat-card">
+            <strong>Smart workflows</strong>
+            <p>Track assignment completion and job applications with ease.</p>
+          </div>
+          <div class="stat-card">
+            <strong>Modern UI</strong>
+            <p>Responsive layout built for desktop and mobile users.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="features-grid">
       <div class="feature-card">
-        <h3>Register</h3>
-        <p>Create student or admin accounts with a simple form.</p>
+        <h3>Create and Manage Users</h3>
+        <p>Admins can manage user roles, and students can view their profile and dashboard.</p>
       </div>
       <div class="feature-card">
-        <h3>Login</h3>
-        <p>Secure access with role-based routes and JWT authentication.</p>
+        <h3>Assignment Dashboard</h3>
+        <p>Students can mark tasks complete and admins can keep track of submissions.</p>
       </div>
       <div class="feature-card">
-        <h3>Assignments</h3>
-        <p>Students can view tasks, admins can add, edit, and delete assignments.</p>
+        <h3>Job Board</h3>
+        <p>Post job opportunities and let students apply directly from the portal.</p>
       </div>
       <div class="feature-card">
-        <h3>Job Posts</h3>
-        <p>Admins can post job opportunities and students can view them easily.</p>
+        <h3>Activity Overview</h3>
+        <p>Quickly view site stats, recent updates, and active job listings.</p>
       </div>
     </section>
+
+    <section class="how-it-works">
+      <h2>How CampusConnect works</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-number">1</span>
+          <h3>Sign up as Student or Admin</h3>
+          <p>Create your account and select your role to access the right dashboard.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-number">2</span>
+          <h3>Manage assignments and jobs</h3>
+          <p>Admins can add and edit content while students stay informed and apply with one click.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-number">3</span>
+          <h3>Track progress with ease</h3>
+          <p>Students mark completed tasks, and admins view who applied or completed each item.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-banner">
+      <div>
+        <h2>Ready to make your campus more organized?</h2>
+        <p>Get started with CampusConnect today and simplify your student-admin coordination.</p>
+      </div>
+      <a class="button" href="register.html">Register Now</a>
+    </section>
+
+    <footer class="site-footer">
+      <p>CampusConnect &copy; 2026. Built for campus teams and student management.</p>
+    </footer>
   </div>
+  <script src="js/app.js"></script>
 </body>
 </html>
