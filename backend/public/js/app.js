@@ -29,7 +29,7 @@ function getUser() {
 function logout() {
   localStorage.removeItem('campusconnect_token');
   localStorage.removeItem('campusconnect_user');
-  window.location.href = 'http://localhost:3000/login.html';
+  window.location.href = `${API_BASE}/login.html`;
 }
 
 async function apiRequest(endpoint, method = 'GET', body) {

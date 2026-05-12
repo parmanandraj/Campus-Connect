@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | CampusConnect</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <div class="logo-block small-logo">
+        <img src="./images/logo.webp" alt="CampusConnect Logo">
+        <div>
+          <h1>Admin Dashboard</h1>
+          <p class="subtitle">Welcome, <span id="adminName"></span></p>
+        </div>
+      </div>
+      <nav class="nav-links dashboard-nav">
+        <a href="index.html">Home</a>
+        <a href="profile.html">Profile</a>
+      </nav>
+      <div class="header-actions">
+        <button id="logoutBtn" class="button secondary">Logout</button>
+      </div>
+    </header>
+    <div id="message" class="message"></div>
+
+    <section class="dashboard-section cards-row">
+      <div class="card full-width">
+        <h3>Registered Users</h3>
+        <ul id="userList"></ul>
+      </div>
+    </section>
+
+    <section class="dashboard-section cards-row">
+      <div class="card">
+        <h3>Manage Assignments</h3>
+        <ul id="assignmentAdminList"></ul>
+      </div>
+      <div class="card">
+        <h3>Manage Jobs</h3>
+        <ul id="jobAdminList"></ul>
+      </div>
+    </section>
+
+    <section class="dashboard-section cards-row">
+      <div class="card">
+        <h3>Add Assignment</h3>
+        <form id="assignmentForm" class="small-form">
+          <label for="assignmentTitle">Title</label>
+          <input type="text" id="assignmentTitle" required />
+          <label for="assignmentDescription">Description</label>
+          <textarea id="assignmentDescription" rows="3" required></textarea>
+          <label for="assignmentDueDate">Due Date</label>
+          <input type="date" id="assignmentDueDate" required />
+          <button type="submit">Add Assignment</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Post Job Opportunity</h3>
+        <form id="jobForm" class="small-form">
+          <label for="jobTitle">Title</label>
+          <input type="text" id="jobTitle" required />
+          <label for="jobCompany">Company</label>
+          <input type="text" id="jobCompany" required />
+          <label for="jobLocation">Location</label>
+          <input type="text" id="jobLocation" required />
+          <label for="jobDescription">Description</label>
+          <textarea id="jobDescription" rows="3" required></textarea>
+          <button type="submit">Post Job</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="dashboard-section cards-row">
+      <div class="card hidden" id="assignmentEditCard">
+        <h3>Edit Assignment</h3>
+        <form id="assignmentUpdateForm" class="small-form">
+          <input type="hidden" id="editAssignmentId" />
+          <label for="editAssignmentTitle">Title</label>
+          <input type="text" id="editAssignmentTitle" required />
+          <label for="editAssignmentDescription">Description</label>
+          <textarea id="editAssignmentDescription" rows="3" required></textarea>
+          <label for="editAssignmentDueDate">Due Date</label>
+          <input type="date" id="editAssignmentDueDate" required />
+          <div class="action-buttons">
+            <button type="submit">Update Assignment</button>
+            <button type="button" id="cancelAssignmentEditBtn" class="button secondary">Cancel</button>
+          </div>
+        </form>
+      </div>
+      <div class="card hidden" id="jobEditCard">
+        <h3>Edit Job</h3>
+        <form id="jobUpdateForm" class="small-form">
+          <input type="hidden" id="editJobId" />
+          <label for="editJobTitle">Title</label>
+          <input type="text" id="editJobTitle" required />
+          <label for="editJobCompany">Company</label>
+          <input type="text" id="editJobCompany" required />
+          <label for="editJobLocation">Location</label>
+          <input type="text" id="editJobLocation" required />
+          <label for="editJobDescription">Description</label>
+          <textarea id="editJobDescription" rows="3" required></textarea>
+          <div class="action-buttons">
+            <button type="submit">Update Job</button>
+            <button type="button" id="cancelJobEditBtn" class="button secondary">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="dashboard-section">
+      <a class="button" href="profile.html">View Profile</a>
+    </section>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+</html>
