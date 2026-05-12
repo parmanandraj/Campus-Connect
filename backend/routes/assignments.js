@@ -8,7 +8,12 @@ const router = express.Router();
 router.get('/', authMiddleware, async (req, res) => {
   try {
     const assignments = await Assignment.find().sort({ createdAt: -1 });
-    res.json(assignments);
+    const assignmentsWithStatus = assignments.map(assignment => {
+      const assignmentObj = assignment.toObject();
+      assignmentObj.completed = (assignmentObj.completedBy || []).some(id => id.toString() === req.user.userId);
+      return assignmentObj;
+    });
+    res.json(assignmentsWithStatus);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error while fetching assignments' });
@@ -34,7 +39,8 @@ router.post(
     }
 
     try {
-      const assignment = new Assignment({ ...req.body, createdBy: req.user.userId });
+      const creatorId = req.user.userId || req.user.id || req.user._id;
+      const assignment = new Assignment({ ...req.body, createdBy: creatorId });
       await assignment.save();
       res.status(201).json(assignment);
     } catch (error) {
@@ -43,6 +49,29 @@ router.post(
     }
   }
 );
+
+router.post('/:id/complete', authMiddleware, async (req, res) => {
+  if (req.user.role !== 'student') {
+    return res.status(403).json({ message: 'Only students can mark assignments completed' });
+  }
+
+  try {
+    const assignment = await Assignment.findById(req.params.id);
+    if (!assignment) {
+      return res.status(404).json({ message: 'Assignment not found' });
+    }
+
+    if (!assignment.completedBy.some(id => id.toString() === req.user.userId)) {
+      assignment.completedBy.push(req.user.userId);
+      await assignment.save();
+    }
+
+    res.json({ message: 'Assignment marked completed', completed: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error while marking assignment completed' });
+  }
+});
 
 router.put('/:id', authMiddleware, async (req, res) => {
   if (req.user.role !== 'admin') {

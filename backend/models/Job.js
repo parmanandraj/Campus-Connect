@@ -26,6 +26,12 @@ const JobSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  applicants: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
   postedAt: {
     type: Date,
     default: Date.now,

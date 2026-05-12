@@ -8,7 +8,12 @@ const router = express.Router();
 router.get('/', authMiddleware, async (req, res) => {
   try {
     const jobs = await Job.find().sort({ postedAt: -1 });
-    res.json(jobs);
+    const jobsWithStatus = jobs.map(job => {
+      const jobObj = job.toObject();
+      jobObj.applied = (jobObj.applicants || []).some(id => id.toString() === req.user.userId);
+      return jobObj;
+    });
+    res.json(jobsWithStatus);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error while fetching jobs' });
@@ -35,7 +40,8 @@ router.post(
     }
 
     try {
-      const job = new Job({ ...req.body, createdBy: req.user.userId });
+      const creatorId = req.user.userId || req.user.id || req.user._id;
+      const job = new Job({ ...req.body, createdBy: creatorId });
       await job.save();
       res.status(201).json(job);
     } catch (error) {
@@ -44,6 +50,29 @@ router.post(
     }
   }
 );
+
+router.post('/:id/apply', authMiddleware, async (req, res) => {
+  if (req.user.role !== 'student') {
+    return res.status(403).json({ message: 'Only students can apply for jobs' });
+  }
+
+  try {
+    const job = await Job.findById(req.params.id);
+    if (!job) {
+      return res.status(404).json({ message: 'Job not found' });
+    }
+
+    if (!job.applicants.some(id => id.toString() === req.user.userId)) {
+      job.applicants.push(req.user.userId);
+      await job.save();
+    }
+
+    res.json({ message: 'Applied for job successfully', applied: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error while applying for job' });
+  }
+});
 
 router.put(
   '/:id',

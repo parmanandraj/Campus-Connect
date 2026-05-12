@@ -128,13 +128,65 @@ async function loadStudentDashboard() {
 
     const assignmentList = document.getElementById('assignmentList');
     assignmentList.innerHTML = assignments.length
-      ? assignments.map(a => `<li><strong>${a.title}</strong><p>${a.description}</p><span class="item-meta">Due: ${a.dueDate}</span></li>`).join('')
+      ? assignments
+          .map(
+            a => `
+              <li>
+                <strong>${a.title}</strong>
+                <p>${a.description}</p>
+                <span class="item-meta">Due: ${a.dueDate}</span>
+                <div class="action-buttons">
+                  ${a.completed ? '<span class="button secondary disabled">Completed</span>' : `<button class="button" data-complete-id="${a._id}">Mark Completed</button>`}
+                </div>
+              </li>
+            `
+          )
+          .join('')
       : '<li>No assignments available yet.</li>';
+
+    assignmentList.querySelectorAll('[data-complete-id]').forEach(button => {
+      button.addEventListener('click', async event => {
+        const assignmentId = event.target.dataset.completeId;
+        try {
+          await apiRequest(`/assignments/${assignmentId}/complete`, 'POST');
+          showMessage('Assignment marked completed', false);
+          await loadStudentDashboard();
+        } catch (error) {
+          showMessage(error.message);
+        }
+      });
+    });
 
     const jobList = document.getElementById('jobList');
     jobList.innerHTML = jobs.length
-      ? jobs.map(j => `<li><strong>${j.title}</strong><p>${j.description}</p><span class="item-meta">${j.company} — ${j.location}</span></li>`).join('')
+      ? jobs
+          .map(
+            j => `
+              <li>
+                <strong>${j.title}</strong>
+                <p>${j.description}</p>
+                <span class="item-meta">${j.company} — ${j.location}</span>
+                <div class="action-buttons">
+                  ${j.applied ? '<span class="button secondary disabled">Applied</span>' : `<button class="button" data-apply-id="${j._id}">Apply</button>`}
+                </div>
+              </li>
+            `
+          )
+          .join('')
       : '<li>No job opportunities posted yet.</li>';
+
+    jobList.querySelectorAll('[data-apply-id]').forEach(button => {
+      button.addEventListener('click', async event => {
+        const jobId = event.target.dataset.applyId;
+        try {
+          await apiRequest(`/jobs/${jobId}/apply`, 'POST');
+          showMessage('Applied for job successfully', false);
+          await loadStudentDashboard();
+        } catch (error) {
+          showMessage(error.message);
+        }
+      });
+    });
   } catch (error) {
     showMessage(error.message);
   }
