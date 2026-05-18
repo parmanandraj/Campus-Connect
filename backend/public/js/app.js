@@ -1,4 +1,4 @@
-const API_BASE = 'https://campus-connect-45n3.onrender.com/';
+const API_BASE = 'https://campus-connect-45n3.onrender.com/api';
 let messageTimeout = null;
 
 function showMessage(message, isError = true) {
@@ -29,7 +29,7 @@ function getUser() {
 function logout() {
   localStorage.removeItem('campusconnect_token');
   localStorage.removeItem('campusconnect_user');
-  window.location.href = `${API_BASE}/login.html`;
+  window.location.href = `/login.html`;
 }
 
 async function apiRequest(endpoint, method = 'GET', body) {
